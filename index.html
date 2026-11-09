@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Certificate of Origin Verification — I.R. of Iran</title>
+<style>
+  :root {
+    --ink: #082f49;
+    --ink-soft: #0e4f74;
+    --bg: #f1f5f9;
+    --card: #ffffff;
+    --line: #e2e8f0;
+    --muted: #64748b;
+    --accent: #0ea5e9;
+    --accent-soft: #e0f2fe;
+    --danger: #dc2626;
+    --radius: 14px;
+    --shadow-sm: 0 1px 2px rgba(8, 47, 73, .06), 0 1px 3px rgba(8, 47, 73, .08);
+    --shadow-md: 0 4px 12px rgba(8, 47, 73, .08), 0 2px 4px rgba(8, 47, 73, .06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: linear-gradient(180deg, #eef6fb 0%, var(--bg) 100%);
+    color: var(--ink);
+    line-height: 1.55;
+    min-height: 100vh;
+    padding: 24px 16px 64px;
+  }
+
+  .layout { max-width: 1120px; margin: 0 auto; }
+
+  /* ---------- Header / Title ---------- */
+  .page-title { text-align: center; margin: 8px 0 28px; }
+  .page-title .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-soft);
+    padding: 6px 14px; border-radius: 999px; font-weight: 600;
+  }
+  .page-title h1 {
+    font-size: clamp(22px, 4vw, 32px);
+    margin: 14px 0 6px; color: var(--ink);
+  }
+  .page-title .subtitle {
+    color: var(--muted); font-size: 14px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  .page-title .verified {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 12px; font-size: 13px; font-weight: 600;
+    color: #15803d; background: #dcfce7;
+    padding: 6px 14px; border-radius: 999px;
+  }
+
+  /* ---------- Cards ---------- */
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); box-shadow: var(--shadow-sm);
+    margin-bottom: 18px; overflow: hidden; transition: box-shadow .2s ease;
+  }
+  .card:hover { box-shadow: var(--shadow-md); }
+
+  .card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 22px;
+    background: linear-gradient(180deg, #f8fafc, #f1f5f9);
+    border-bottom: 1px solid var(--line);
+    cursor: pointer; user-select: none;
+  }
+  .card-header h2 {
+    margin: 0; font-size: 16px; font-weight: 600; color: var(--ink);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-header h2::before {
+    content: ""; width: 4px; height: 18px;
+    background: var(--accent); border-radius: 2px;
+  }
+  .card-header .chevron {
+    transition: transform .25s ease; color: var(--ink-soft); font-size: 13px;
+  }
+  .card.collapsed .chevron { transform: rotate(-90deg); }
+  .card.collapsed .card-body { display: none; }
+
+  .card-body { padding: 18px 22px 22px; }
+
+  /* ---------- Info rows ---------- */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px 28px;
+  }
+  .info-row {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 10px 0; border-bottom: 1px dashed var(--line);
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-row .key {
+    font-size: 12px; font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .info-row .value { font-size: 14.5px; color: var(--ink); word-break: break-word; }
+  .info-row .value.mono {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px;
+  }
+  .info-row .value.empty { color: #94a3b8; font-style: italic; }
+
+  /* ---------- Tables ---------- */
+  .table-wrap {
+    overflow-x: auto; border-radius: 10px;
+    border: 1px solid var(--line); margin-top: 6px;
+  }
+  table.data-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 13.5px; min-width: 720px;
+  }
+  .data-table thead th {
+    background: #f8fafc; color: var(--ink);
+    font-weight: 600; font-size: 12px;
+    text-transform: uppercase; letter-spacing: .04em;
+    padding: 12px 14px; text-align: left;
+    border-bottom: 2px solid var(--line); white-space: nowrap;
+  }
+  .data-table tbody td {
+    padding: 12px 14px; border-bottom: 1px solid var(--line);
+    color: #1e293b; vertical-align: top;
+  }
+  .data-table tbody tr:last-child td { border-bottom: none; }
+  .data-table tbody tr:nth-child(even) { background: #fafcfe; }
+  .data-table tbody tr:hover { background: var(--accent-soft); }
+  .data-table td.num { font-variant-numeric: tabular-nums; text-align: right; }
+  .data-table .empty-cell { color: #94a3b8; }
+
+  .table-title {
+    font-size: 13px; font-weight: 600; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .08em; margin: 4px 0 10px;
+  }
+
+  /* ---------- Actions ---------- */
+  .actions {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    justify-content: flex-end; margin-top: 26px;
+    padding-top: 20px; border-top: 1px solid var(--line);
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: transform .12s ease, box-shadow .2s ease, background .2s ease;
+    font-family: inherit;
+  }
+  .btn:hover { background: #f8fafc; box-shadow: var(--shadow-sm); }
+  .btn:active { transform: translateY(1px); }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { background: #0284c7; }
+  .btn.ghost { background: transparent; }
+  .btn svg { width: 16px; height: 16px; }
+
+  /* ---------- Toast ---------- */
+  .toast-host {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; gap: 8px; z-index: 9999;
+  }
+  .toast {
+    background: var(--ink); color: #fff; padding: 10px 18px;
+    border-radius: 10px; font-size: 13.5px;
+    box-shadow: var(--shadow-md); animation: toast-in .25s ease;
+  }
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---------- Print ---------- */
+  @media print {
+    body { background: #fff; padding: 0; }
+    .no-print { display: none !important; }
+    .card {
+      box-shadow: none; border: 1px solid #ccc;
+      page-break-inside: avoid; margin-bottom: 12px;
+    }
+    .card-header { background: #f4f4f4; cursor: default; }
+    .card.collapsed .card-body { display: block !important; }
+    .table-wrap { border: 1px solid #ccc; overflow: visible; }
+    table.data-table { min-width: 0; font-size: 11px; }
+    .data-table thead th { background: #eee; font-size: 10px; }
+    .data-table tbody tr:hover { background: transparent; }
+    .page-title .verified { color: #000; background: none; padding: 0; }
+    a[href]::after { content: ""; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ===== Page Title ===== -->
+  <header class="page-title">
+    <span class="eyebrow">Certificate Verification</span>
+    <h1>I.R. of IRAN — Certificate of Origin</h1>
+    <div class="subtitle">Ref: 2932512090049</div>
+    <div class="verified">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M20 6L9 17l-5-5"/></svg>
+      Verified Certificate
+    </div>
+  </header>
+
+  <!-- ===== General ===== -->
+  <section class="card" data-collapsible>
+    <div class="card-header" role="button" tabindex="0" aria-expanded="true">
+      <h2>General</h2>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="info-grid">
+        <div class="info-row"><span class="key">CO Type</span><span class="value">GSTP</span></div>
+        <div class="info-row"><span class="key">Issue Date</span><span class="value mono">2025/12/09</span></div>
+        <div class="info-row"><span class="key">Reference Number</span><span class="value mono">2932512090049</span></div>
+        <div class="info-row"><span class="key">QR-Code</span><span class="value mono">05456c1c98084be6a0b4bef383dc82ec</span></div>
+        <div class="info-row"><span class="key">Certifying Organization</span><span class="value">Mashhad Chamber of Commerce, Industries, Mines &amp; Agriculture</span></div>
+        <div class="info-row"><span class="key">Authority Branch</span><span class="value">Mashhad Chamber of Commerce, Industries, Mines &amp; Agriculture</span></div>
+        <div class="info-row"><span class="key">Authenticator Name and Position</span><span class="value">MOHAMAD REZA TAVAKOLI ZADEH — President of MCCIMA</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Exporter (UPDATED) ===== -->
+  <section class="card" data-collapsible>
+    <div class="card-header" role="button" tabindex="0" aria-expanded="true">
+      <h2>Exporter</h2>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="info-grid">
+        <div class="info-row"><span class="key">ID</span><span class="value mono">14007700745</span></div>
+        <div class="info-row"><span class="key">Company Name</span><span class="value">ALMAS DANEH ESTAHBAN COMMERCIAL GROUP</span></div>
+        <div class="info-row"><span class="key">Name</span><span class="value">ALMAS DANEH</span></div>
+        <div class="info-row"><span class="key">Tel</span><span class="value empty">—</span></div>
+        <div class="info-row"><span class="key">On behalf of</span><span class="value empty">No information found.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Consignee (UPDATED) ===== -->
+  <section class="card" data-collapsible>
+    <div class="card-header" role="button" tabindex="0" aria-expanded="true">
+      <h2>Consignee</h2>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="info-grid">
+        <div class="info-row"><span class="key">Destination Country</span><span class="value">CHINA</span></div>
+        <div class="info-row"><span class="key">Consignee Name</span><span class="value">Tianjin Yicheng Changda Supply Chain Management Co LTD</span></div>
+        <div class="info-row"><span class="key">Consignee Address</span><span class="value">Room 101, Building 9-3, SHUIMU QINGHUA Garden, Beitang Street, Binhai New Area, Tianjin</span></div>
+        <div class="info-row"><span class="key">Notify to</span><span class="value empty">No information found.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Transportation (UPDATED VEHICLE) ===== -->
+  <section class="card" data-collapsible>
+    <div class="card-header" role="button" tabindex="0" aria-expanded="true">
+      <h2>Transportation</h2>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="info-grid" style="margin-bottom:16px">
+        <div class="info-row"><span class="key">Export Type</span><span class="value">On Ground</span></div>
+      </div>
+
+      <div class="table-title">Transportation Table</div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Row</th>
+              <th>Goods Delivery Border</th>
+              <th>Transit Type Title</th>
+              <th>Vehicle Specification</th>
+              <th>Bill Of Lading Serial</th>
+              <th>Transit Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="num">1</td>
+              <td class="empty-cell">—</td>
+              <td>On Ground</td>
+              <td>EA 9363 MR/MR 7151 TR</td>
+              <td class="empty-cell">—</td>
+              <td class="empty-cell">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Goods (UPDATED) ===== -->
+  <section class="card" data-collapsible>
+    <div class="card-header" role="button" tabindex="0" aria-expanded="true">
+      <h2>Goods</h2>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="table-title">Goods Table</div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Row</th>
+              <th>HS Code</th>
+              <th>Title</th>
+              <th>Amount</th>
+              <th>Unit Type</th>
+              <th>2nd Amount</th>
+              <th>2nd Unit</th>
+              <th>Origin Criterion</th>
+              <th>Gross Weight</th>
+              <th>Net Weight</th>
+              <th>Weight Unit</th>
+              <th>Invoice No</th>
+              <th>Invoice Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="num">1</td>
+              <td class="num">080420</td>
+              <td>Dried figs</td>
+              <td class="num">2,393</td>
+              <td>Carton</td>
+              <td class="empty-cell">—</td>
+              <td class="empty-cell"></td>
+              <td>P</td>
+              <td class="num">23,000</td>
+              <td class="num">22,614</td>
+              <td>Kg</td>
+              <td class="num">2026055</td>
+              <td class="num">2026-10-17</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== For official use ===== -->
+  <section class="card" data-collapsible>
+    <div class="card-header" role="button" tabindex="0" aria-expanded="true">
+      <h2>For Official Use</h2>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="info-grid">
+        <div class="info-row"><span class="key">CO Description</span><span class="value empty">No information found.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Actions ===== -->
+  <div class="actions no-print">
+    <button class="btn ghost" id="btnDraft">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+      See Draft Version
+    </button>
+    <button class="btn primary" id="btnPrint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Print
+    </button>
+    <button class="btn" id="btnBack">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      Back
+    </button>
+  </div>
+
+</div>
+
+<div class="toast-host" id="toastHost"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  const toastHost = document.getElementById("toastHost");
+  function toast(message, duration = 2400) {
+    const el = document.createElement("div");
+    el.className = "toast";
+    el.textContent = message;
+    toastHost.appendChild(el);
+    setTimeout(() => {
+      el.style.opacity = "0";
+      el.style.transition = "opacity .3s";
+      setTimeout(() => el.remove(), 300);
+    }, duration);
+  }
+
+  document.querySelectorAll("[data-collapsible]").forEach((card) => {
+    const header = card.querySelector(".card-header");
+    const toggle = () => {
+      const collapsed = card.classList.toggle("collapsed");
+      header.setAttribute("aria-expanded", String(!collapsed));
+    };
+    header.addEventListener("click", toggle);
+    header.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
+
+  document.getElementById("btnPrint").addEventListener("click", () => {
+    toast("Preparing print view…");
+    document.querySelectorAll(".card.collapsed").forEach((c) => {
+      c.classList.remove("collapsed");
+      c.querySelector(".card-header").setAttribute("aria-expanded", "true");
+    });
+    setTimeout(() => window.print(), 150);
+  });
+
+  document.getElementById("btnDraft").addEventListener("click", () => {
+    toast("Draft version is not available in this demo.");
+  });
+
+  document.getElementById("btnBack").addEventListener("click", () => {
+    if (history.length > 1) history.back();
+    else toast("No previous page in history.");
+  });
+
+  window.addEventListener("beforeprint", () => {
+    document.querySelectorAll(".card.collapsed").forEach((c) => c.classList.remove("collapsed"));
+  });
+})();
+</script>
+</body>
+</html>
